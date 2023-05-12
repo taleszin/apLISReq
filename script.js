@@ -2,9 +2,6 @@ let formularios = document.querySelector("#formularios");
 let dadosSalvos = []; //transforma os dados salvos em um array, ou seja, cada vez que clicar no botão salvar será gerado um novo objeto com os dados da pessoa.
 let generoM = document.querySelector("#masc");
 let generoF = document.querySelector("#fem");
-$(document).ready(function(){
-  $('#paramCpf').mask('999.999.999-99');
-})
 function salvar(){
     let nome = formularios.form1;
     let telefone = formularios.form2;
