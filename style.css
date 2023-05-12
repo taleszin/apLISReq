@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(31, 119, 201);
+    font : normal 15pt Arial;
+    }
+    header{
+    color : white;
+    text-align : center;
+    }
+    div{
+        text-align : center;
+        padding : 5px;
+        justify-content: center;
+    }
+   
+    footer{
+        color : white;
+        text-align : center;
+        font-style : italic;
+    
+    }
