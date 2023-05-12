@@ -12,6 +12,19 @@ function salvar(){
     } else if (generoF.checked) {
         genero = "Feminino";
     }
+    
+    // verificando se o nome, telefone ou email já foram cadastrados antes de adicioná-los ao array
+    for (let i = 0; i < dadosSalvos.length; i++) {
+       if (dadosSalvos[i].telefone === telefone.value) {
+            alert("Telefone já cadastrado!");
+            return;
+        } else if (dadosSalvos[i].email === email.value) {
+            alert("Email já cadastrado!");
+            return;
+        }
+    }
+    
+    // adicionando os dados ao array caso não tenham sido cadastrados antes
     return {
         nome: nome.value,
         telefone: telefone.value,
@@ -19,6 +32,7 @@ function salvar(){
         genero: genero
     };
 }
+
 
 
 function limpar(){
