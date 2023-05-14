@@ -63,9 +63,7 @@ function visualiza(){
    formularios.form3.value = textodoAlert3;
    
 }
-
-
-
+$('.form2').mask('(00) 00000-0000'); //mascara jquery telefone
 document.querySelector(".btn2").addEventListener("click", function() { 
     let dados = salvar();
     dadosSalvos.push(dados); //toda vez que clicar no botão adiciona um novo objeto ao array.
