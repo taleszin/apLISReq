@@ -88,6 +88,6 @@ function verTabela() {
         emailCell.innerHTML = dadosSalvos[i].email;
         generoCell.innerHTML = dadosSalvos[i].genero; // conteúdo da nova célula
     }
-    // Redireciona para a nova página html com a tabela
+    // Redireciona para a nova página html com a tabela.
 }
 
