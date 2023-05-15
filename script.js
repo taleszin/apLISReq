@@ -70,3 +70,24 @@ document.querySelector(".btn2").addEventListener("click", function() {
 });
 
 document.querySelector(".btn3").addEventListener("click", visualiza);
+
+function verTabela() {
+    // Limpa o conteúdo da tabela antes de inserir os dados novamente
+    let tabela = document.getElementById("minha-tabela");
+    tabela.innerHTML = "";
+
+    // Preenche a tabela com as informações salvas pelo usuário
+    for (let i = 0; i < dadosSalvos.length; i++) {
+        let newRow = tabela.insertRow();
+        let nomeCell = newRow.insertCell(0);
+        let telefoneCell = newRow.insertCell(1);
+        let emailCell = newRow.insertCell(2);
+        let generoCell = newRow.insertCell(3); // nova célula adicionada
+        nomeCell.innerHTML = dadosSalvos[i].nome;
+        telefoneCell.innerHTML = dadosSalvos[i].telefone;
+        emailCell.innerHTML = dadosSalvos[i].email;
+        generoCell.innerHTML = dadosSalvos[i].genero; // conteúdo da nova célula
+    }
+    // Redireciona para a nova página html com a tabela
+}
+
