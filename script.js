@@ -78,7 +78,7 @@ function verTabela() {
 
     // Preenche a tabela com as informações salvas pelo usuário
     for (let i = 0; i < dadosSalvos.length; i++) {
-        let newRow = tabela.insertRow();
+        let newRow = tabela.insertRow(); //inserir linha na tabela
         let nomeCell = newRow.insertCell(0);
         let telefoneCell = newRow.insertCell(1);
         let emailCell = newRow.insertCell(2);
@@ -90,4 +90,20 @@ function verTabela() {
     }
     // Redireciona para a nova página html com a tabela.
 }
-
+function ligacaoPHP() {
+    $.ajax({
+      url: 'controller.php',
+      method: 'POST',
+      data: { dados: dadosSalvos },
+      dataType: 'json',
+      success: function(response) {
+        // Manipular a resposta da requisição aqui
+      },
+      error: function(error) {
+        // Lidar com erros aqui
+      }
+    });
+  }
+  
+  
+  
