@@ -8,26 +8,31 @@ function salvar() {
     let telefone = formularios.form2.value;
     let email = formularios.form3.value;
     let genero = "";
+
     if (generoM.checked) {
         genero = "Masculino";
     } else if (generoF.checked) {
         genero = "Feminino";
     }
 
+    // Verifica se o telefone está em branco
+    if (telefone === "") {
+        alert("Telefone não pode estar em branco!");
+        return;
+    }
 
-    // verificando se o nome, telefone ou email já foram cadastrados antes de adicioná-los ao array
-    for (let i = 0; i < dadosSalvos.length; i++) {
-        if (dadosSalvos[i].telefone === telefone) {
+    // Verifica se o nome, telefone ou email já foram cadastrados antes de adicioná-los ao array
+    /*for (let i = 0; i < dadosSalvos.length; i++) {
+        if (dadosSalvos[i]?.telefone === telefone) {
             alert("Telefone já cadastrado!");
             return;
-        } else if (dadosSalvos[i].email === email) {
+        } else if (dadosSalvos[i]?.email === email) {
             alert("Email já cadastrado!");
             return;
         }
-    }
+    } */
 
-    // adicionando os dados ao objeto caso não tenham sido cadastrados antes
-    //lembrando que dadosSalvos é um array, e dados é um objeto.
+    // Adiciona os dados ao objeto caso não tenham sido cadastrados antes
     let dados = {
         nome: nome,
         telefone: telefone,
@@ -35,6 +40,7 @@ function salvar() {
         genero: genero
     };
 
+    console.log(dados);
 
     $.ajax({
         url: 'controller.php',
@@ -49,9 +55,9 @@ function salvar() {
         }
     });
 
-    dadosSalvos.push(dados); // toda vez que clicar no botão adiciona um novo objeto ao array.
-    
+    dadosSalvos.push(dados); // Toda vez que clicar no botão, adiciona um novo objeto ao array.
 }
+
 
 
 function limpar(){
