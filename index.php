@@ -2,7 +2,6 @@
     include_once ("controller.php");
     include_once ("config.php");
     ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,7 +18,7 @@
         <form id="formularios">
           <label for="Form1">Nome:</label>
           <input type="text" name="form1" class="form1" autocomplete="off"><br> <br>
-          <label for="Form2">Contato:</label>
+          <label fQor="Form2">Contato:</label>
           <input type="text" name="form2" class="form2" autocomplete="off"><br> <br>
           <label for="Form3">Email:</label>
           <input type="text" name="form3" class="form3" autocomplete="off">
