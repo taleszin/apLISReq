@@ -26,7 +26,8 @@ function salvar() {
         }
     }
 
-    // adicionando os dados ao array caso não tenham sido cadastrados antes
+    // adicionando os dados ao objeto caso não tenham sido cadastrados antes
+    //lembrando que dadosSalvos é um array, e dados é um objeto.
     let dados = {
         nome: nome,
         telefone: telefone,
@@ -110,7 +111,7 @@ function verTabela() {
 
     
 }
-function ligacaoPHP() {
+/*function ligacaoPHP() {
     $.ajax({
       url: 'controller.php',
       method: 'POST',
@@ -124,7 +125,7 @@ function ligacaoPHP() {
       }
     });
 
-  }
+  }*/ 
   
   
   
