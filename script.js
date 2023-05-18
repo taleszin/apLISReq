@@ -2,60 +2,36 @@ let formularios = document.querySelector("#formularios");
 let dadosSalvos = []; //transforma os dados salvos em um array, ou seja, cada vez que clicar no botão salvar será gerado um novo objeto com os dados da pessoa.
 let generoM = document.querySelector("#masc");
 let generoF = document.querySelector("#fem");
-
-function salvar() {
-    let nome = formularios.form1.value;
-    let telefone = formularios.form2.value;
-    let email = formularios.form3.value;
+function salvar(){
+    let nome = formularios.form1;
+    let telefone = formularios.form2;
+    let email = formularios.form3;
     let genero = "";
-
     if (generoM.checked) {
         genero = "Masculino";
     } else if (generoF.checked) {
         genero = "Feminino";
     }
-
-    // Verifica se o telefone está em branco
-    if (telefone === "") {
-        alert("Telefone não pode estar em branco!");
-        return;
-    }
-
-    // Verifica se o nome, telefone ou email já foram cadastrados antes de adicioná-los ao array
-    /*for (let i = 0; i < dadosSalvos.length; i++) {
-        if (dadosSalvos[i]?.telefone === telefone) {
-            alert("Telefone já cadastrado!");
-            return;
-        } else if (dadosSalvos[i]?.email === email) {
-            alert("Email já cadastrado!");
-            return;
-        }
-    } */
-
-    // Adiciona os dados ao objeto caso não tenham sido cadastrados antes
-    let dados = {
-        nome: nome,
-        telefone: telefone,
-        email: email,
+    
+    // verificando se o nome, telefone ou email já foram cadastrados antes de adicioná-los ao array
+    // for (let i = 0; i < dadosSalvos.length; i++) {
+    //    if (dadosSalvos[i].telefone === telefone.value) {
+    //         alert("Telefone já cadastrado!");
+    //         return;
+    //     } else if (dadosSalvos[i].email === email.value) {
+    //         alert("Email já cadastrado!");
+    //         return;
+    //     }
+    // }
+    
+    // adicionando os dados ao array caso não tenham sido cadastrados antes
+    console.log(dadosSalvos)
+    return {
+        nome: nome.value,
+        telefone: telefone.value,
+        email: email.value,
         genero: genero
     };
-
-    console.log(dados);
-
-    $.ajax({
-        url: 'controller.php',
-        method: 'POST',
-        data: { dados: dados },
-        dataType: 'json',
-        success: function(response) {
-            // Manipular a resposta da requisição aqui, se necessário
-        },
-        error: function(error) {
-            // Lidar com erros aqui, se necessário
-        }
-    });
-
-    dadosSalvos.push(dados); // Toda vez que clicar no botão, adiciona um novo objeto ao array.
 }
 
 
@@ -114,10 +90,8 @@ function verTabela() {
         generoCell.innerHTML = dadosSalvos[i].genero; // conteúdo da nova célula
     }
     // Redireciona para a nova página html com a tabela.
-
-    
 }
-/*function ligacaoPHP() {
+function ligacaoPHP() {
     $.ajax({
       url: 'controller.php',
       method: 'POST',
@@ -130,8 +104,7 @@ function verTabela() {
         // Lidar com erros aqui
       }
     });
-
-  }*/ 
+  }
   
   
   
