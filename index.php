@@ -37,7 +37,7 @@
     <div class="botoes">
         <input type="button" value="Salvar" class="btn2" onclick ="salvar()">
         <input type="button" value="Visualiza" class="btn3" onclick = "visualiza()">
-        <input type="button" value="Excluir tudo" class="btn4" onclick = "limpar()">
+        <input type="button" value="Excluir tudo" class="btn4" onclick= "excluirTudo()">
         <input type="button" value="Ver tabela" class="btn5" onclick = "verTabela()">
     </div>
     <div class="tabela">
@@ -55,7 +55,6 @@
         </table>
     </div>
     <p id = "printDados"></p>
-    <script src="script.js"></script>
-   
+    <script src="script.js"></script> 
 </body>
 </html>
