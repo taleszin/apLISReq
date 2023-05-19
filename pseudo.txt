@@ -1,1 +1,3 @@
 autoincrement sql
+Fazer editar o usuário inserido
+Poder excluir o ultimo registro.
