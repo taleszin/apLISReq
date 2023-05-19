@@ -1,13 +1,17 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
+$servername = "localhost";
+$username = "root";
+$password = "";
 $dbname = "cadastro";
 $port = 3306;
-try {
-    $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $pass);
-    echo "conexão realizada com sucesso";
-} catch (PDOException $err) {
-    echo "deu erro";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+} else {
+    echo "<script>";
+    echo "console.log('Deu certo a conexão.');";
+    echo "</script>";
 }
 ?>

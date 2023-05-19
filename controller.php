@@ -1,20 +1,9 @@
 <?php
+include 'config.php';
+
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
 
 if ($dados) {
-    // Conectar ao banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "cadastro";
-    $port = 3306;
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-    }
-    
     // Inserir os dados na tabela de usuários
     foreach ($dados as $item) {
         $nome = $conn->real_escape_string($item['nome']);
@@ -30,22 +19,7 @@ if ($dados) {
             echo "Erro ao salvar os dados no banco de dados: " . $conn->error;
         }
     }
-
-    $conn->close();
 } else if (isset($_POST['buscar_dados'])) {
-    // Conectar ao banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "cadastro";
-    $port = 3306;
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-    }
-
     // Buscar os dados na tabela de usuários
     $sql = "SELECT * FROM usuarios";
     $result = $conn->query($sql);
@@ -62,7 +36,7 @@ if ($dados) {
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-        
+
         while ($row = $result->fetch_assoc()) {
             $html .= '<tr>';
             $html .= '<td>' . $row["nome"] . '</td>';
@@ -71,30 +45,15 @@ if ($dados) {
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '</tr>';
         }
-        
+
         $html .= '</tbody>';
         $html .= '</table>';
-        
+
         echo $html;
     } else {
         echo "Nenhum dado encontrado na tabela.";
     }
-
-    $conn->close();
 } else if (isset($_POST['excluir_tudo'])) {
-    // Conectar ao banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "cadastro";
-    $port = 3306;
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-    }
-
     // Excluir todos os dados da tabela de usuários
     $sql = "DELETE FROM usuarios";
 
@@ -103,9 +62,9 @@ if ($dados) {
     } else {
         echo "Erro ao excluir os dados do banco de dados: " . $conn->error;
     }
-
-    $conn->close();
 } else {
     echo 'Nenhum dado recebido.';
 }
+
+$conn->close();
 ?>

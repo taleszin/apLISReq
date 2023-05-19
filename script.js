@@ -25,9 +25,7 @@ function limpar() {
 //         }
 //     });
 //}
-
 function salvar() {
-    
     let nome = formularios.form1.value;
     let telefone = formularios.form2.value;
     let email = formularios.form3.value;
@@ -46,8 +44,17 @@ function salvar() {
         genero: genero
     };
 
+    if (dadosJaExiste(dados)) { // Verifica se os dados já existem no array
+        console.log('Esse usuário já foi cadastrado.');
+        alert('Esse usuário já foi cadastrado.');
+        limparCampos(); // Limpa os campos de entrada de dados
+        return;
+    }
+
     dadosSalvos.push(dados);
     console.log(dados);
+
+    limparCampos(); // Limpa os campos de entrada de dados
 
     $.ajax({
         url: 'controller.php',
@@ -60,9 +67,14 @@ function salvar() {
             console.log('Erro ao salvar os dados.');
         }
     });
-    
+}
 
-    return dados;
+function limparCampos() {
+    formularios.form1.value = '';
+    formularios.form2.value = '';
+    formularios.form3.value = '';
+    generoM.checked = false;
+    generoF.checked = false;
 }
 
 function excluirTudo() {
@@ -72,12 +84,18 @@ function excluirTudo() {
         data: { excluir_tudo: true },
         success: function(response) {
             console.log(response);
+            limparDadosSalvos(); // Limpa os dados salvos no JavaScript
         },
         error: function(error) {
             console.log('Erro ao excluir os dados.');
         }
     });
 }
+
+function limparDadosSalvos() {
+    dadosSalvos = []; // Limpa o array de dados salvos no JavaScript
+}
+
 // function visualiza() {
 //     let textodoAlert1 = '';
 //     let textodoAlert2 = '';
@@ -122,4 +140,15 @@ function limparTabela() {
     }
 }
 
+function dadosJaExiste(dados) {
+    for (let i = 0; i < dadosSalvos.length; i++) {
+        if (dadosSalvos[i].nome === dados.nome &&
+            dadosSalvos[i].telefone === dados.telefone &&
+            dadosSalvos[i].email === dados.email &&
+            dadosSalvos[i].genero === dados.genero) {
+            return true; // Dados já existem no array
+        }
+    }
+    return false; // Dados não existem no array
+}
 
