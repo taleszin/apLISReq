@@ -3,6 +3,10 @@ let dadosSalvos = [];
 let generoM = document.querySelector("#masc");
 let generoF = document.querySelector("#fem");
 
+function limpar() {
+    dadosSalvos = [];
+    limparTabela(); // Limpa o conteúdo da tabela
+}
 function ligacaoPHP() {
     console.log(dadosSalvos);
 
