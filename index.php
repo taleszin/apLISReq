@@ -38,7 +38,7 @@
         <input type="button" value="Salvar" class="btn2" onclick ="salvar()">
         <input type="button" value="Visualiza" class="btn3" onclick = "visualiza()">
         <input type="button" value="Excluir tudo" class="btn4" onclick= "excluirTudo()">
-        <input type="button" value="Ver tabela" class="btn5" onclick = "verTabela()">
+        <input type="button" value="Ver tabela" class="btn5" onclick = "buscarDados()">
     </div>
     <div class="tabela">
         <table id="minha-tabela">

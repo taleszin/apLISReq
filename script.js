@@ -96,7 +96,7 @@ function excluirTudo() {
 
 $('.form2').mask('(00) 00000-0000');
 
-function verTabela() {
+function buscarDados() {
     let tabela = document.getElementById("minha-tabela");
     limparTabela(); // Limpa o conteúdo anterior da tabela
 
@@ -106,19 +106,7 @@ function verTabela() {
         data: { buscar_dados: true }, // Enviar uma flag para indicar a busca de dados
         success: function(response) {
             // Manipular a resposta da requisição aqui
-            let dados = JSON.parse(response);
-
-            for (let i = 0; i < dados.length; i++) {
-                let newRow = tabela.insertRow();
-                let nomeCell = newRow.insertCell(0);
-                let telefoneCell = newRow.insertCell(1);
-                let emailCell = newRow.insertCell(2);
-                let generoCell = newRow.insertCell(3);
-                nomeCell.innerHTML = dados[i].nome;
-                telefoneCell.innerHTML = dados[i].telefone;
-                emailCell.innerHTML = dados[i].email;
-                generoCell.innerHTML = dados[i].genero;
-            }
+            tabela.innerHTML = response;
         },
         error: function(error) {
             // Lidar com erros aqui
