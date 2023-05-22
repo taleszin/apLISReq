@@ -2,7 +2,6 @@ let formularios = document.querySelector("#formularios");
 let dadosSalvos = [];
 let generoM = document.querySelector("#masc");
 let generoF = document.querySelector("#fem");
-
 function limpar() {
     dadosSalvos = [];
     limparTabela(); // Limpa o conteúdo da tabela
@@ -10,7 +9,6 @@ function limpar() {
 
 // function ligacaoPHP() {
 //     console.log(dadosSalvos);
-
 //     $.ajax({
 //         url: 'controller.php',
 //         method: 'POST',
@@ -36,7 +34,12 @@ function salvar() {
     } else if (generoF.checked) {
         genero = "Feminino";
     }
-
+    
+    if (nome === "" || telefone === "" || email === "") {
+        console.log("Preencha todos os campos antes de salvar.");
+        alert("Preencha todos os campos antes de salvar.");
+        return;
+    }
     let dados = {
         nome: nome,
         telefone: telefone,
@@ -62,6 +65,8 @@ function salvar() {
         data: { dados: JSON.stringify(dadosSalvos) },
         success: function(response) {
             console.log('Dados salvos:', response);
+            buscarDados();
+            limparDadosSalvos();
         },
         error: function(error) {
             console.log('Erro ao salvar os dados.');
@@ -85,6 +90,7 @@ function excluirTudo() {
         success: function(response) {
             console.log(response);
             limparDadosSalvos(); // Limpa os dados salvos no JavaScript
+            buscarDados();
         },
         error: function(error) {
             console.log('Erro ao excluir os dados.');
@@ -111,13 +117,12 @@ function limparDadosSalvos() {
 //     formularios.form2.value = textodoAlert2;
 //     formularios.form3.value = textodoAlert3;
 // }
-
 $('.form2').mask('(00) 00000-0000');
-
+$('.form3').inputmask('email');
 function buscarDados() {
     let tabela = document.getElementById("minha-tabela");
     limparTabela(); // Limpa o conteúdo anterior da tabela
-
+    limparDadosSalvos()
     $.ajax({
         url: 'controller.php',
         method: 'POST',
@@ -152,3 +157,6 @@ function dadosJaExiste(dados) {
     return false; // Dados não existem no array
 }
 
+function editar() {
+ window.prompt("insira seu ID");
+}

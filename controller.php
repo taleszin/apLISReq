@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
 
 if ($dados) {
@@ -25,7 +24,7 @@ if ($dados) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Construir a tabela HTML
+        // gerando a tabela HTML
         $html = '<table id="minha-tabela">';
         $html .= '<thead>';
         $html .= '<tr>';
@@ -33,6 +32,8 @@ if ($dados) {
         $html .= '<th>Telefone</th>';
         $html .= '<th>E-mail</th>';
         $html .= '<th>Gênero</th>';
+        $html .= '<th>ID</th>';
+        $html .= '<th>Ação</th>'; 
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
@@ -43,9 +44,10 @@ if ($dados) {
             $html .= '<td>' . $row["telefone"] . '</td>';
             $html .= '<td>' . $row["email"] . '</td>';
             $html .= '<td>' . $row["genero"] . '</td>';
+            $html .= '<td>' . $row["ID"] . '</td>';
+            $html .= '<td><button class="editar-btn" onclick = "editar()"' . $row["ID"] . '">Editar</button></td>'; // Botão de editar com o ID do usuário
             $html .= '</tr>';
         }
-
         $html .= '</tbody>';
         $html .= '</table>';
 

@@ -42,19 +42,16 @@
     </div>
     <div class="tabela">
         <table id="minha-tabela">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>E-mail</th>
-                    <th>Genero</th>
-                </tr>
-            </thead>
             <tbody>
             </tbody>
         </table>
     </div>
     <p id = "printDados"></p>
     <script src="script.js"></script> 
+    <script>
+        $(document).ready(function() {
+            buscarDados();
+        });
+    </script>
 </body>
 </html>
