@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
 
 if ($dados) {
@@ -45,7 +46,7 @@ if ($dados) {
             $html .= '<td>' . $row["email"] . '</td>';
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '<td>' . $row["ID"] . '</td>';
-            $html .= '<td><button class="editar-btn" onclick = "editar()"' . $row["ID"] . '">Editar</button></td>'; // Botão de editar com o ID do usuário
+            $html .= '<td><button class="editar-btn" onclick="editar(' . $row["ID"] . ')">Editar</button></td>'; // Botão de editar com o ID do usuário
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -64,6 +65,19 @@ if ($dados) {
     } else {
         echo "Erro ao excluir os dados do banco de dados: " . $conn->error;
     }
+} else if (isset($_POST['editar_usuario']) && isset($_POST['id'])) {
+//adicionar a funcionalidade para editar
+$id = $_POST['id'];
+$sql = "SELECT * FROM usuarios WHERE ID = $id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    echo json_encode($row);
+} else {
+    echo "Nenhum dado encontrado para o ID fornecido.";
+}
+
 } else {
     echo 'Nenhum dado recebido.';
 }

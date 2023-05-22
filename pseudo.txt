@@ -1,3 +1,12 @@
-autoincrement sql
+autoincrement sql feito
 Fazer editar o usuário inserido
 Poder excluir o ultimo registro.
+
+
+
+função editar{
+    tenho um código JS que trabalha juntamente com um controller.php. O controller.php  pega os dados que foram salvos e insere em uma tabela no banco de dados. 
+    ele também gera automaticamente uma tabela com os dados de cada usuário inserido, e ao lado dos dados, um botão editar.
+    Esse botão editar chama uma função editar(). quero que, a função editar puxe os dados que estão ao seu lado, e insira nos campos de texto da tela.
+    como posso fazer isso ?
+}

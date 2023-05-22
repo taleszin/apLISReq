@@ -34,7 +34,7 @@ function salvar() {
     } else if (generoF.checked) {
         genero = "Feminino";
     }
-    
+
     if (nome === "" || telefone === "" || email === "") {
         console.log("Preencha todos os campos antes de salvar.");
         alert("Preencha todos os campos antes de salvar.");
@@ -157,6 +157,28 @@ function dadosJaExiste(dados) {
     return false; // Dados não existem no array
 }
 
-function editar() {
- window.prompt("insira seu ID");
+function editar(id) {
+    $.ajax({
+        url: 'controller.php',
+        method: 'POST',
+        data: { editar_usuario: true, id: id },
+        success: function(response) {
+            preencherCampos(response); // Chama a função preencherCampos passando a resposta diretamente
+        },
+        error: function(error) {
+            console.log('Erro ao buscar os dados do usuário.');
+        }
+    });
+}
+
+function preencherCampos(dados) {
+    formularios.form1.value = dados.nome;
+    formularios.form2.value = dados.telefone;
+    formularios.form3.value = dados.email;
+
+    if (dados.genero === "Masculino") {
+        generoM.checked = true;
+    } else if (dados.genero === "Feminino") {
+        generoF.checked = true;
+    }
 }

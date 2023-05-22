@@ -1,21 +1,20 @@
 <?php
 include 'config.php';
+// Recebe os dados da requisição AJAX
+if (isset($_POST['buscar_usuario']) && isset($_POST['id'])) {
+    $id = $_POST['id'];
 
-$id = isset($_POST['id']) ? $_POST['id'] : null;
+    // Aqui você pode realizar a busca do usuário no banco de dados ou em alguma outra fonte de dados
 
-if ($id) {
-    $sql = "SELECT * FROM usuarios WHERE id = '$id'";
-    $result = $conn->query($sql);
+    // Supondo que você tenha obtido os dados do usuário com base no ID
+    $dadosUsuario = array(
+        'nome' => 'Nome do Usuário',
+        'telefone' => 'Telefone do Usuário',
+        'email' => 'Email do Usuário',
+        'genero' => 'Gênero do Usuário'
+    );
 
-    if ($result->num_rows === 1) {
-        $usuario = $result->fetch_assoc();
-        echo json_encode($usuario);
-    } else {
-        echo "Usuário não encontrado.";
-    }
-} else {
-    echo "ID de usuário não fornecido.";
+    // Envia os dados do usuário como resposta da requisição AJAX
+    echo json_encode($dadosUsuario);
 }
-
-$conn->close();
 ?>
