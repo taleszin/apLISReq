@@ -118,7 +118,6 @@ function limparDadosSalvos() {
 //     formularios.form3.value = textodoAlert3;
 // }
 $('.form2').mask('(00) 00000-0000');
-$('.form3').inputmask('email');
 function buscarDados() {
     let tabela = document.getElementById("minha-tabela");
     limparTabela(); // Limpa o conteúdo anterior da tabela
@@ -158,27 +157,20 @@ function dadosJaExiste(dados) {
 }
 
 function editar(id) {
+    console.log("ID do usuário a ser editado: " + id);
     $.ajax({
         url: 'controller.php',
-        method: 'POST',
-        data: { editar_usuario: true, id: id },
+        method: 'GET',
+        data: { editar_usuario: true },
         success: function(response) {
-            preencherCampos(response); // Chama a função preencherCampos passando a resposta diretamente
+            console.log(response);
+            limparDadosSalvos(); // Limpa os dados salvos no JavaScript
+            buscarDados();
         },
         error: function(error) {
-            console.log('Erro ao buscar os dados do usuário.');
+            console.log('Erro ao excluir os dados.');
         }
     });
 }
 
-function preencherCampos(dados) {
-    formularios.form1.value = dados.nome;
-    formularios.form2.value = dados.telefone;
-    formularios.form3.value = dados.email;
 
-    if (dados.genero === "Masculino") {
-        generoM.checked = true;
-    } else if (dados.genero === "Feminino") {
-        generoF.checked = true;
-    }
-}

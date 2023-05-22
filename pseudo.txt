@@ -10,3 +10,36 @@ função editar{
     Esse botão editar chama uma função editar(). quero que, a função editar puxe os dados que estão ao seu lado, e insira nos campos de texto da tela.
     como posso fazer isso ?
 }
+// function editar(id) {
+//     $.ajax({
+//         url: 'controller.php',
+//         method: 'POST',
+//         data: { editar_usuario: true, id: id },
+//         dataType: 'json', // Adicionado para indicar o tipo de dados esperado como JSON
+//         success: function(response) {
+//             preencherCampos(response);
+//         },
+//         error: function(error) {
+//             console.log('Erro ao buscar os dados do usuário.');
+//         }
+//     });
+// }
+// function preencherCampos(dados) {
+//     // Verificar se os dados estão definidos
+//     if (dados && Object.keys(dados).length > 0) {
+//         formularios.form1.value = dados.nome || '';
+//         formularios.form2.value = dados.telefone || '';
+//         formularios.form3.value = dados.email || '';
+        
+//         if (dados.genero === "Masculino") {
+//             generoM.checked = true;
+//         } else if (dados.genero === "Feminino") {
+//             generoF.checked = true;
+//         } else {
+//             generoM.checked = false;
+//             generoF.checked = false;
+//         }
+//     } else {
+//         console.log('Erro ao preencher os campos. Dados ausentes ou inválidos.');
+//     }
+// }

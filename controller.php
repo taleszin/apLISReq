@@ -1,8 +1,6 @@
 <?php
 include 'config.php';
-
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
-
 if ($dados) {
     // Inserir os dados na tabela de usuários
     foreach ($dados as $item) {
@@ -11,7 +9,6 @@ if ($dados) {
         $email = $conn->real_escape_string($item['email']);
         $genero = $conn->real_escape_string($item['genero']);
         $sql = "INSERT INTO usuarios (nome, telefone, email, genero) VALUES ('$nome', '$telefone', '$email', '$genero')";
-
         if ($conn->query($sql) === true) {
             echo "Dados salvos:";
             echo json_encode($dados);
@@ -23,7 +20,6 @@ if ($dados) {
     // Buscar os dados na tabela de usuários
     $sql = "SELECT * FROM usuarios";
     $result = $conn->query($sql);
-
     if ($result->num_rows > 0) {
         // gerando a tabela HTML
         $html = '<table id="minha-tabela">';
@@ -45,8 +41,8 @@ if ($dados) {
             $html .= '<td>' . $row["telefone"] . '</td>';
             $html .= '<td>' . $row["email"] . '</td>';
             $html .= '<td>' . $row["genero"] . '</td>';
-            $html .= '<td>' . $row["ID"] . '</td>';
-            $html .= '<td><button class="editar-btn" onclick="editar(' . $row["ID"] . ')">Editar</button></td>'; // Botão de editar com o ID do usuário
+            $html .= '<td>' . $row["id"] . '</td>';
+            $html .= '<td><button class="editar-btn" onclick="editar(' . $row["id"] . ')">Editar</button></td>'; // Botão de editar com o ID do usuário
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -65,12 +61,11 @@ if ($dados) {
     } else {
         echo "Erro ao excluir os dados do banco de dados: " . $conn->error;
     }
-} else if (isset($_POST['editar_usuario']) && isset($_POST['id'])) {
+} else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
 //adicionar a funcionalidade para editar
-$id = $_POST['id'];
+$id = $_GET['id'];
 $sql = "SELECT * FROM usuarios WHERE ID = $id";
 $result = $conn->query($sql);
-
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     echo json_encode($row);
@@ -81,6 +76,5 @@ if ($result->num_rows > 0) {
 } else {
     echo 'Nenhum dado recebido.';
 }
-
 $conn->close();
 ?>
