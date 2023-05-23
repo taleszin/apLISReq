@@ -57,7 +57,6 @@ if ($dados) {
     else if (isset($_POST['excluir_tudo'])) {
     // Excluir todos os dados da tabela de usuários
     $sql = "DELETE FROM usuarios";
-
     if ($conn->query($sql) === true) {
         $sql = "ALTER TABLE usuarios AUTO_INCREMENT = 1";
         $conn->query($sql);
@@ -68,7 +67,7 @@ if ($dados) {
 }
 
 else if (isset($_POST['excluir_usuario'])) {
-    // Excluir todos os dados da tabela de usuários
+
     $id = $_POST['id'];
     $sql = "DELETE FROM usuarios WHERE ID = $id";
     if ($conn->query($sql) === true) {

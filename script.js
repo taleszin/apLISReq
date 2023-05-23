@@ -103,19 +103,13 @@ function limparDadosSalvos() {
 }
 
 // function visualiza() {
-//     let textodoAlert1 = '';
-//     let textodoAlert2 = '';
-//     let textodoAlert3 = '';
+    // let textodoAlert1 = '';
+    // let textodoAlert2 = '';
+    // let textodoAlert3 = '';
 
-//     for (let i = 0; i < dadosSalvos.length; i++) {
-//         textodoAlert1 += `${dadosSalvos[i].nome}, `;
-//         textodoAlert2 += `${dadosSalvos[i].telefone}, `;
-//         textodoAlert3 += `${dadosSalvos[i].email}, `;
-//     }
-
-//     formularios.form1.value = textodoAlert1;
-//     formularios.form2.value = textodoAlert2;
-//     formularios.form3.value = textodoAlert3;
+    // formularios.form1.value = textodoAlert1;
+    // formularios.form2.value = textodoAlert2;
+    // formularios.form3.value = textodoAlert3;
 // }
 $('.form2').mask('(00) 00000-0000');
 function buscarDados() {
@@ -164,13 +158,18 @@ function editar(id) {
         data: { editar_usuario: true, id: id },
         success: function(response) {
             console.log(response);
+
+            // Atribuir os valores dos dados do usuário aos campos de texto
+            var dadosUsuario = response; // Supondo que a resposta já esteja no formato desejado
+            formularios.form1.value = dadosUsuario.nome;
+            formularios.form2.value = dadosUsuario.telefone;
+            formularios.form3.value = dadosUsuario.email;
         },
         error: function(error) {
             console.log('Erro ao buscar os dados do usuário.');
         }
     });
 }
-
 function excluirIndividual(id) {
     console.log("ID do usuário a ser excluído: " + id);
     $.ajax({
