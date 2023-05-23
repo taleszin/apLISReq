@@ -52,3 +52,6 @@ função update{
     inseridos no textfield. a função update irá trabalhar assim, após o clique da função editar. a função update
     irá fazer a atualização dos dados do usuário daquele id. lembre-se que o id existe apenas no banco de dados, segue o arquivo script.js :
 }
+
+// ao salvar, comparar se o id já existe no banco de dados. caso já exista
+atualizar os dados.

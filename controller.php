@@ -1,22 +1,32 @@
 <?php
 include 'config.php';
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
-$dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
+
 if ($dados) {
-    // Verificar se o usuário já existe no banco de dados
     foreach ($dados as $item) {
         $nome = $conn->real_escape_string($item['nome']);
         $telefone = $conn->real_escape_string($item['telefone']);
         $email = $conn->real_escape_string($item['email']);
         $genero = $conn->real_escape_string($item['genero']);
         
-        // Verificar se o usuário já existe pelo nome, telefone, email e gênero
-        $sql = "SELECT * FROM usuarios WHERE nome='$nome' AND telefone='$telefone' AND email='$email' AND genero='$genero'";
-        $result = $conn->query($sql);
-        
-        if ($result->num_rows > 0) {
-            echo "Esse usuário já foi cadastrado.";
-            continue; // Pula para a próxima iteração do loop sem inserir o usuário
+        if (isset($item['id'])) {
+            $id = $conn->real_escape_string($item['id']);
+            
+            // Verificar se o usuário já existe pelo ID
+            $sql = "SELECT * FROM usuarios WHERE id='$id'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                echo "Usuário já existe krl";
+                // Atualizar os dados do usuário existente
+                $sql = "UPDATE usuarios SET nome='$nome', telefone='$telefone', email='$email', genero='$genero' WHERE id='$id'";
+                if ($conn->query($sql) === true) {
+                    echo "Dados atualizados:";
+                    echo json_encode($dados);
+                } else {
+                    echo "Erro ao atualizar os dados no banco de dados: " . $conn->error;
+                }
+                continue; // Pula para a próxima iteração do loop sem inserir o usuário
+            }
         }
         
         // Inserir o usuário na tabela de usuários
@@ -29,6 +39,7 @@ if ($dados) {
         }
     }
 }
+
  else if (isset($_POST['buscar_dados'])) {
     // Buscar os dados na tabela de usuários
     $sql = "SELECT * FROM usuarios"; //consulta sql
