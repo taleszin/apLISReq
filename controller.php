@@ -1,13 +1,25 @@
 <?php
 include 'config.php';
 $dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
+$dados = isset($_POST['dados']) ? json_decode($_POST['dados'], true) : null;
 if ($dados) {
-    // Inserir os dados na tabela de usuários
+    // Verificar se o usuário já existe no banco de dados
     foreach ($dados as $item) {
         $nome = $conn->real_escape_string($item['nome']);
         $telefone = $conn->real_escape_string($item['telefone']);
         $email = $conn->real_escape_string($item['email']);
         $genero = $conn->real_escape_string($item['genero']);
+        
+        // Verificar se o usuário já existe pelo nome, telefone, email e gênero
+        $sql = "SELECT * FROM usuarios WHERE nome='$nome' AND telefone='$telefone' AND email='$email' AND genero='$genero'";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            echo "Esse usuário já foi cadastrado.";
+            continue; // Pula para a próxima iteração do loop sem inserir o usuário
+        }
+        
+        // Inserir o usuário na tabela de usuários
         $sql = "INSERT INTO usuarios (nome, telefone, email, genero) VALUES ('$nome', '$telefone', '$email', '$genero')";
         if ($conn->query($sql) === true) {
             echo "Dados salvos:";
@@ -16,7 +28,8 @@ if ($dados) {
             echo "Erro ao salvar os dados no banco de dados: " . $conn->error;
         }
     }
-} else if (isset($_POST['buscar_dados'])) {
+}
+ else if (isset($_POST['buscar_dados'])) {
     // Buscar os dados na tabela de usuários
     $sql = "SELECT * FROM usuarios"; //consulta sql
     $result = $conn->query($sql); // Executa a consulta SQL armazenada na variável $sql e armazena o resultado na variável $result
@@ -43,7 +56,7 @@ if ($dados) {
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '<td>' . $row["id"] . '</td>';
             $html .= '<td><button class="editar-btn" onclick="editar(' . $row["id"] . ')">Editar</ button></td>'; // Botão de editar recebe o ID do usuário como parametro
-            $html .= '<td><button class="excluir-btn" onclick="excluirIndividual(' . $row["id"] . ')">Excluir</button></td>';
+            $html .= '<td><button class="excluir-btn" onclick="excluir(' . $row["id"] . ')">Excluir</button></td>';
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -78,15 +91,20 @@ else if (isset($_POST['excluir_usuario'])) {
 }
 else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM usuarios WHERE ID = $id";
+    $sql = "SELECT * FROM usuarios WHERE ID = $id"; //pega os dados do usuário pelo id.
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo json_encode($row);
+    $row = $result->fetch_assoc(); //retorna os dados em cada campo de texto, lá no javascript.
+    $nome = $conn->real_escape_string($row['nome']);
+    $telefone = $conn->real_escape_string($row['telefone']);
+    $email = $conn->real_escape_string($row['email']);
+    $genero = $conn->real_escape_string($row['genero']);
+    echo $row['nome'] . ',' . ($row['telefone']) . ',' . ($row['email']) . ',' . $id; // Adicionar o ID ao final da resposta
     } else {
-        echo "Nenhum dado encontrado para o ID fornecido.";
+    echo "Nenhum dado encontrado para o ID fornecido.";
     }
-}
+    }
+   
  else {
     echo 'Nenhum dado recebido.';
 }

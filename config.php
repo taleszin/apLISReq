@@ -9,9 +9,5 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Verificar a conexão
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-} else {
-    echo "<script>";
-    echo "console.log('Deu certo a conexão.');";
-    echo "</script>";
 }
 ?>

@@ -5,10 +5,9 @@ Poder excluir o ultimo registro.
 
 
 função editar{
-    tenho um código JS que trabalha juntamente com um controller.php. O controller.php  pega os dados que foram salvos e insere em uma tabela no banco de dados. 
-    ele também gera automaticamente uma tabela com os dados de cada usuário inserido, e ao lado dos dados, um botão editar.
-    Esse botão editar chama uma função editar(). quero que, a função editar puxe os dados que estão ao seu lado, e insira nos campos de texto da tela.
-    como posso fazer isso ?
+    agora minha função editar consegue puxar os dados do usuário pelo ID e inserir os dados no campo de texto. Quero que, 
+    ao atualizar os dados desse usuário e clicar em salvar, os dados dele sejam atualizados no banco de dados automaticamente.
+    baseado sempre no id do usuário. 
 }
 // function editar(id) {
 //     $.ajax({
@@ -46,4 +45,10 @@ função editar{
 função excluirdado individual{
     essa função irá pegar o id do usuário (já consigo fazer isso)
     após pegar o id do usuário, ela irá deletar aquele usuário individual.
+}
+
+função update{
+    faça uma função update. essa função trabalhará da seguinte forma. após a função editar ser chamada, os dados do usuário serão
+    inseridos no textfield. a função update irá trabalhar assim, após o clique da função editar. a função update
+    irá fazer a atualização dos dados do usuário daquele id. lembre-se que o id existe apenas no banco de dados, segue o arquivo script.js :
 }

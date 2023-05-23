@@ -35,7 +35,7 @@ function salvar() {
         genero = "Feminino";
     }
 
-    if (nome === "" || telefone === "" || email === "") {
+    if (nome === "" || telefone === "" || email === "" || genero === "") {
         console.log("Preencha todos os campos antes de salvar.");
         alert("Preencha todos os campos antes de salvar.");
         return;
@@ -53,7 +53,7 @@ function salvar() {
         limparCampos(); // Limpa os campos de entrada de dados
         return;
     }
-
+    
     dadosSalvos.push(dados);
     console.log(dados);
 
@@ -73,7 +73,6 @@ function salvar() {
         }
     });
 }
-
 function limparCampos() {
     formularios.form1.value = '';
     formularios.form2.value = '';
@@ -149,28 +148,31 @@ function dadosJaExiste(dados) {
     }
     return false; // Dados não existem no array
 }
-
 function editar(id) {
     console.log("ID do usuário a ser editado: " + id);
     $.ajax({
-        url: 'controller.php',
-        method: 'GET',
-        data: { editar_usuario: true, id: id },
-        success: function(response) {
-            console.log(response);
-
-            // Atribuir os valores dos dados do usuário aos campos de texto
-            var dadosUsuario = response; // Supondo que a resposta já esteja no formato desejado
-            formularios.form1.value = dadosUsuario.nome;
-            formularios.form2.value = dadosUsuario.telefone;
-            formularios.form3.value = dadosUsuario.email;
-        },
-        error: function(error) {
-            console.log('Erro ao buscar os dados do usuário.');
-        }
+    url: 'controller.php',
+    method: 'GET',
+    data: { editar_usuario: true, id: id },
+    success: function(response) {
+    console.log(response);
+    // Separar os valores da resposta usando a vírgula como delimitador
+    var dadosUsuario = response.split(',');
+    // Atribuir os valores dos dados do usuário aos campos de texto
+    formularios.form1.value = dadosUsuario[0];
+    formularios.form2.value = dadosUsuario[1];
+    formularios.form3.value = dadosUsuario[2];
+    formularios.form4.value = id; // Exibir o ID do banco de dados no campo form4
+    },
+    error: function(error) {
+    console.log('Erro ao buscar os dados do usuário.');
+    }
     });
-}
-function excluirIndividual(id) {
+    }
+
+
+
+function excluir(id) {
     console.log("ID do usuário a ser excluído: " + id);
     $.ajax({
         url: 'controller.php',
@@ -183,6 +185,54 @@ function excluirIndividual(id) {
         },
         error: function(error) {
             console.log('Erro ao excluir os dados.');
+        }
+    });
+}
+function update() {
+    let nome = formularios.form1.value;
+    let telefone = formularios.form2.value;
+    let email = formularios.form3.value;
+    let genero = "";
+
+    if (generoM.checked) {
+        genero = "Masculino";
+    } else if (generoF.checked) {
+        genero = "Feminino";
+    }
+
+    if (nome === "" || telefone === "" || email === "" || genero === "") {
+        console.log("Preencha todos os campos antes de atualizar.");
+        alert("Preencha todos os campos antes de atualizar.");
+        return;
+    }
+
+    let dadosAtualizados = {
+        nome: nome,
+        telefone: telefone,
+        email: email,
+        genero: genero
+    };
+
+    if (!dadosJaExiste(dadosAtualizados)) {
+        console.log('Esse usuário ainda não foi cadastrado.');
+        alert('Esse usuário ainda não foi cadastrado.');
+        limparCampos();
+        return;
+    }
+
+    let idUsuario = getIdUsuarioAtual();
+
+    $.ajax({
+        url: 'controller.php',
+        method: 'POST',
+        data: { atualizar_usuario: true, id: idUsuario, dados: JSON.stringify(dadosAtualizados) },
+        success: function(response) {
+            console.log(response);
+            limparCampos();
+            buscarDados();
+        },
+        error: function(error) {
+            console.log('Erro ao atualizar os dados do usuário.');
         }
     });
 }

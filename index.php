@@ -15,12 +15,14 @@
 <body>
     <div class = "forms">
         <form id="formularios">
-          <label for="Form1">Nome:</label>
+          <label for="form1">Nome:</label>
           <input type="text" name="form1" class="form1" autocomplete="off"><br> <br>
-          <label fQor="Form2">Contato:</label>
+          <label fQor="form2">Contato:</label>
           <input type="text" name="form2" class="form2" autocomplete="off"><br> <br>
-          <label for="Form3">Email:</label>
-          <input type="text" name="form3" class="form3" autocomplete="off">
+          <label for="form3">Email:</label>
+          <input type="text" name="form3" class="form3" autocomplete="off"> <br> <br>
+          <label for="form4">ID:</label>
+          <input type="text" name="form4" class="form4" autocomplete="off"> <br> <br>
           <input type="reset" value="Limpar" class="btn1">
         </form>
       </div>
