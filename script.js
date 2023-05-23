@@ -161,17 +161,16 @@ function editar(id) {
     $.ajax({
         url: 'controller.php',
         method: 'GET',
-        data: { editar_usuario: true },
+        data: { editar_usuario: true, id: id },
         success: function(response) {
             console.log(response);
-            limparDadosSalvos(); // Limpa os dados salvos no JavaScript
-            buscarDados();
         },
         error: function(error) {
-            console.log('Erro ao excluir os dados.');
+            console.log('Erro ao buscar os dados do usuário.');
         }
     });
 }
+
 function excluirIndividual(id) {
     console.log("ID do usuário a ser excluído: " + id);
     $.ajax({

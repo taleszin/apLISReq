@@ -1,6 +1,6 @@
 <?php
     include_once ("controller.php");
-    ?>
+    ?> 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
