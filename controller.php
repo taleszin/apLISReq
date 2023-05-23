@@ -43,6 +43,7 @@ if ($dados) {
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '<td>' . $row["id"] . '</td>';
             $html .= '<td><button class="editar-btn" onclick="editar(' . $row["id"] . ')">Editar</button></td>'; // Botão de editar com o ID do usuário
+            $html .= '<td><button class="excluir-btn" onclick="excluirIndividual(' . $row["id"] . ')">Excluir</button></td>';
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -61,7 +62,18 @@ if ($dados) {
     } else {
         echo "Erro ao excluir os dados do banco de dados: " . $conn->error;
     }
-} else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
+} 
+else if (isset($_POST['excluir_usuario'])) {
+    // Excluir todos os dados da tabela de usuários
+    $id = $_POST['id'];
+    $sql = "DELETE FROM usuarios WHERE ID = $id";
+    if ($conn->query($sql) === true) {
+        echo "Todos os dados foram excluídos com sucesso.";
+    } else {
+        echo "Erro ao excluir os dados do banco de dados: " . $conn->error;
+    }
+}
+else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
 //adicionar a funcionalidade para editar
 $id = $_GET['id'];
 $sql = "SELECT * FROM usuarios WHERE ID = $id";

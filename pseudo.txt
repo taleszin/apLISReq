@@ -43,3 +43,7 @@ função editar{
 //         console.log('Erro ao preencher os campos. Dados ausentes ou inválidos.');
 //     }
 // }
+função excluirdado individual{
+    essa função irá pegar o id do usuário (já consigo fazer isso)
+    após pegar o id do usuário, ela irá deletar aquele usuário individual.
+}
