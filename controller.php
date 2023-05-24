@@ -46,7 +46,7 @@ if ($dados) {
     $result = $conn->query($sql); // Executa a consulta SQL armazenada na variável $sql e armazena o resultado na variável $result
     if ($result->num_rows > 0) {
         // gerando a tabela HTML
-        $html = '<table id="minha-tabela">';
+        $html = '<table class ="minha-tabela">';
         $html .= '<thead>';
         $html .= '<tr>';
         $html .= '<th>Nome</th>';
@@ -65,8 +65,8 @@ if ($dados) {
             $html .= '<td>' . $row["email"] . '</td>';
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '<td>' . $row["id"] . '</td>';
-            $html .= '<td><button class="editar-btn" onclick="editar(' . $row["id"] . ')">Editar</ button></td>'; // Botão de editar recebe o ID do usuário como parametro
-            $html .= '<td><button class="excluir-btn" onclick="excluir(' . $row["id"] . ')">Excluir</button></td>';
+            $html .= '<td><button class="btn" onclick="editar(' . $row["id"] . ')">Editar</ button></td>'; // Botão de editar recebe o ID do usuário como parametro
+            $html .= '<td><button class="btn" onclick="excluir(' . $row["id"] . ')">Excluir</button></td>';
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -113,11 +113,6 @@ else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
     } else {
         echo "Nenhum dado encontrado para o ID fornecido.";
     }
-}
-
-   
- else {
-    echo 'Nenhum dado recebido.';
 }
 $conn->close();
 ?>

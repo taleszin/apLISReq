@@ -51,17 +51,11 @@ function salvar() {
         id: id
     };
 
-    if (dadosJaExiste(dados)) { // Verifica se os dados já existem no array
-        console.log('Esse usuário já foi cadastrado.');
-        alert('Esse usuário já foi cadastrado.');
-        limparCampos(); // Limpa os campos de entrada de dados
-        return;
-    }
- 
 
     if (id !== "") {
         let dadosExistente = dadosSalvos.find(dados => dados.id === id);
         if (dadosExistente) {
+            console.clear();
             console.log('Esse usuário já foi cadastrado.');
             alert('Esse usuário já foi cadastrado.');
             limparCampos(); // Limpa os campos de entrada de dados
@@ -79,6 +73,7 @@ function salvar() {
         method: 'POST',
         data: { dados: JSON.stringify(dadosSalvos) },
         success: function(response) {
+            console.clear();
             console.log('Dados salvos:', response);
             buscarDados();
             limparDadosSalvos();
@@ -103,6 +98,7 @@ function excluirTudo() {
         method: 'POST',
         data: { excluir_tudo: true },
         success: function(response) {
+            console.clear();
             console.log(response);
             limparDadosSalvos(); // Limpa os dados salvos no JavaScript
             buscarDados();
@@ -155,25 +151,15 @@ function limparTabela() {
     }
 }
 
-function dadosJaExiste(dados) {
-    for (let i = 0; i < dadosSalvos.length; i++) {
-        if (dadosSalvos[i].nome === dados.nome &&
-            dadosSalvos[i].telefone === dados.telefone &&
-            dadosSalvos[i].email === dados.email &&
-            dadosSalvos[i].genero === dados.genero) {
-            return true; // Dados já existem no array
-        }
-    }
-    return false; // Dados não existem no array
-}
-
 function editar(id) {
+    console.clear();
     console.log("ID do usuário a ser editado: " + id);
     $.ajax({
         url: 'controller.php',
         method: 'GET',
         data: { editar_usuario: true, id: id },
         success: function(response) {
+            console.clear();
             console.log(response);
             // Separar os valores da resposta usando a vírgula como delimitador
             var dadosUsuario = response.split(',');
@@ -198,21 +184,29 @@ function editar(id) {
 
 
 function excluir(id) {
-    console.log("ID do usuário a ser excluído: " + id);
-    $.ajax({
-        url: 'controller.php',
-        method: 'POST',
-        data: { excluir_usuario: true, id: id },
-        success: function(response) {
-            console.log(response);
-            limparDadosSalvos(); // Limpa os dados salvos no JavaScript
-            buscarDados();
-        },
-        error: function(error) {
-            console.log('Erro ao excluir os dados.');
-        }
-    });
+    // Exibe a mensagem de confirmação ao usuário
+    if (confirm("Tem certeza que deseja excluir o usuário?")) {
+        console.log("ID do usuário a ser excluído: " + id);
+        $.ajax({
+            url: 'controller.php',
+            method: 'POST',
+            data: { excluir_usuario: true, id: id },
+            success: function(response) {
+                console.clear();
+                console.log(response);
+                limparDadosSalvos(); // Limpa os dados salvos no JavaScript
+                buscarDados();
+            },
+            error: function(error) {
+                console.log('Erro ao excluir os dados.');
+            }
+        });
+    } else {
+        // O usuário cancelou a exclusão
+        console.log("Exclusão cancelada pelo usuário.");
+    }
 }
+
 
 // function update() {
 //     let nome = formularios.form1.value;
