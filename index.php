@@ -22,13 +22,13 @@ include_once("controller.php");
             <input type="text" name="form2" class="form2" autocomplete="off"><br> <br>
             <label for="form3">Email:</label>
             <input type="text" name="form3" class="form3" autocomplete="off"> <br> <br>
-            <input type="text" name="form4" class="form4" autocomplete="off"> <br> <br>
+            <input type="hidden" name="form4" class="form4" autocomplete="off"> <br> <br>
             <input type="reset" value="Limpar" class="btn1">
         </form>
     </div>
     <div class="radio">
         <label for="masc">
-            <input type="radio" name="gender" id="masc">
+            <input type="radio"  name="gender" id="masc" >
             Masculino
         </label>
         <label for="fem">

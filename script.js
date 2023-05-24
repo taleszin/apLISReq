@@ -182,12 +182,20 @@ function editar(id) {
             formularios.form2.value = dadosUsuario[1];
             formularios.form3.value = dadosUsuario[2];
             formularios.form4.value = id; // Exibir o ID do banco de dados no campo form4
+            // Preencher o botão de rádio de acordo com o gênero do usuário
+            let genero = dadosUsuario[4]; // Atribuir o valor do gênero recuperado dos dados do usuário (4 pq é o quarto item no array de dados, 3 eh o id)
+            if (genero === "Masculino") {
+                generoM.checked = true; // Definir o botão de rádio masculino como selecionado
+            } else if (genero === "Feminino") {
+                generoF.checked = true; // Definir o botão de rádio feminino como selecionado
+            }
         },
         error: function(error) {
             console.log('Erro ao buscar os dados do usuário.');
         }
     });
 }
+
 
 function excluir(id) {
     console.log("ID do usuário a ser excluído: " + id);
@@ -206,51 +214,51 @@ function excluir(id) {
     });
 }
 
-function update() {
-    let nome = formularios.form1.value;
-    let telefone = formularios.form2.value;
-    let email = formularios.form3.value;
-    let genero = "";
+// function update() {
+//     let nome = formularios.form1.value;
+//     let telefone = formularios.form2.value;
+//     let email = formularios.form3.value;
+//     let genero = "";
 
-    if (generoM.checked) {
-        genero = "Masculino";
-    } else if (generoF.checked) {
-        genero = "Feminino";
-    }
+//     if (generoM.checked) {
+//         genero = "Masculino";
+//     } else if (generoF.checked) {
+//         genero = "Feminino";
+//     }
 
-    if (nome === "" || telefone === "" || email === "" || genero === "") {
-        console.log("Preencha todos os campos antes de atualizar.");
-        alert("Preencha todos os campos antes de atualizar.");
-        return;
-    }
+//     if (nome === "" || telefone === "" || email === "" || genero === "") {
+//         console.log("Preencha todos os campos antes de atualizar.");
+//         alert("Preencha todos os campos antes de atualizar.");
+//         return;
+//     }
 
-    let dadosAtualizados = {
-        nome: nome,
-        telefone: telefone,
-        email: email,
-        genero: genero
-    };
+//     let dadosAtualizados = {
+//         nome: nome,
+//         telefone: telefone,
+//         email: email,
+//         genero: genero
+//     };
 
-    if (!dadosJaExiste(dadosAtualizados)) {
-        console.log('Esse usuário ainda não foi cadastrado.');
-        alert('Esse usuário ainda não foi cadastrado.');
-        limparCampos();
-        return;
-    }
+//     if (!dadosJaExiste(dadosAtualizados)) {
+//         console.log('Esse usuário ainda não foi cadastrado.');
+//         alert('Esse usuário ainda não foi cadastrado.');
+//         limparCampos();
+//         return;
+//     }
 
-    let idUsuario = getIdUsuarioAtual();
+//     let idUsuario = getIdUsuarioAtual();
 
-    $.ajax({
-        url: 'controller.php',
-        method: 'POST',
-        data: { atualizar_usuario: true, id: idUsuario, dados: JSON.stringify(dadosAtualizados) },
-        success: function(response) {
-            console.log(response);
-            limparCampos();
-            buscarDados();
-        },
-        error: function(error) {
-            console.log('Erro ao atualizar os dados do usuário.');
-        }
-    });
-}
+//     $.ajax({
+//         url: 'controller.php',
+//         method: 'POST',
+//         data: { atualizar_usuario: true, id: idUsuario, dados: JSON.stringify(dadosAtualizados) },
+//         success: function(response) {
+//             console.log(response);
+//             limparCampos();
+//             buscarDados();
+//         },
+//         error: function(error) {
+//             console.log('Erro ao atualizar os dados do usuário.');
+//         }
+//     });
+// }

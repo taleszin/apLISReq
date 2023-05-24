@@ -55,3 +55,6 @@ função update{
 
 // ao salvar, comparar se o id já existe no banco de dados. caso já exista
 atualizar os dados.
+ao excluir, botar mensagem confirmando
+radio quando editar
+checkbox 

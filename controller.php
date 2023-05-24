@@ -58,7 +58,6 @@ if ($dados) {
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-
         while ($row = $result->fetch_assoc()) {
             $html .= '<tr>';
             $html .= '<td>' . $row["nome"] . '</td>';
@@ -105,16 +104,17 @@ else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
     $sql = "SELECT * FROM usuarios WHERE ID = $id"; //pega os dados do usuário pelo id.
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc(); //retorna os dados em cada campo de texto, lá no javascript.
-    $nome = $conn->real_escape_string($row['nome']);
-    $telefone = $conn->real_escape_string($row['telefone']);
-    $email = $conn->real_escape_string($row['email']);
-    $genero = $conn->real_escape_string($row['genero']);
-    echo $row['nome'] . ',' . ($row['telefone']) . ',' . ($row['email']) . ',' . $id; // Adicionar o ID ao final da resposta
+        $row = $result->fetch_assoc(); //retorna os dados em cada campo de texto, lá no javascript.
+        $nome = $conn->real_escape_string($row['nome']);
+        $telefone = $conn->real_escape_string($row['telefone']);
+        $email = $conn->real_escape_string($row['email']);
+        $genero = $conn->real_escape_string($row['genero']);
+        echo $row['nome'] . ',' . ($row['telefone']) . ',' . ($row['email']) . ',' . $id . ',' . $genero; // Adicionar o ID e o gênero ao final da resposta
     } else {
-    echo "Nenhum dado encontrado para o ID fornecido.";
+        echo "Nenhum dado encontrado para o ID fornecido.";
     }
-    }
+}
+
    
  else {
     echo 'Nenhum dado recebido.';
