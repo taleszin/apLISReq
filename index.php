@@ -19,15 +19,15 @@ include_once("controller.php");
         <div class="forms">
             <form id="formularios">
                 <label for="form1">Nome:</label>
-                <input type="text" name="form1" class="form1" autocomplete="off"><br> <br>
+                <input type="text" name="form1" class="form1" autocomplete="off">
                 <label for="form2">Contato:</label>
-                <input type="text" name="form2" class="form2" autocomplete="off"><br> <br>
+                <input type="text" name="form2" class="form2" autocomplete="off">
                 <label for="form3">Email:</label>
-                <input type="text" name="form3" class="form3" autocomplete="off"> <br> <br>
+                <input type="text" name="form3" class="form3" autocomplete="off"> 
                 <input type="hidden" name="form4" class="form4" autocomplete="off">
-                <label for="form5">Maior de 18?</label>
-                <input type="checkbox" name="form5" class="form5" autocomplete="off"> 
-                <input type="reset" value="Limpar campos" class="btn">
+                <label for="form5" class="label-maior">Maior de 18?</label>
+                <input type="checkbox" name="form5" class="form5" id="maior" value="1" autocomplete="off">
+                <input type="reset" value="Limpar campos" class="btn" id = "botaoReset">
             </form>
         </div>
         <div class="radio">

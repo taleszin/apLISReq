@@ -8,7 +8,7 @@ if ($dados) {
         $telefone = $conn->real_escape_string($item['telefone']);
         $email = $conn->real_escape_string($item['email']);
         $genero = $conn->real_escape_string($item['genero']);
-        
+        $maior = $conn->real_escape_string($item['maior']);
         if (isset($item['id'])) {
             $id = $conn->real_escape_string($item['id']);
             
@@ -30,7 +30,7 @@ if ($dados) {
         }
         
         // Inserir o usuário na tabela de usuários
-        $sql = "INSERT INTO usuarios (nome, telefone, email, genero) VALUES ('$nome', '$telefone', '$email', '$genero')";
+        $sql = "INSERT INTO usuarios (nome, telefone, email, genero, maior) VALUES ('$nome', '$telefone', '$email', '$genero' , '$maior')";
         if ($conn->query($sql) === true) {
             echo "Dados salvos:";
             echo json_encode($dados);
@@ -40,13 +40,13 @@ if ($dados) {
     }
 }
 
- else if (isset($_POST['buscar_dados'])) {
+else if (isset($_POST['buscar_dados'])) {
     // Buscar os dados na tabela de usuários
     $sql = "SELECT * FROM usuarios"; //consulta sql
     $result = $conn->query($sql); // Executa a consulta SQL armazenada na variável $sql e armazena o resultado na variável $result
     if ($result->num_rows > 0) {
         // gerando a tabela HTML
-        $html = '<table class ="minha-tabela">';
+        $html = '<table class="minha-tabela">';
         $html .= '<thead>';
         $html .= '<tr>';
         $html .= '<th>Nome</th>';
@@ -54,6 +54,8 @@ if ($dados) {
         $html .= '<th>E-mail</th>';
         $html .= '<th>Gênero</th>';
         $html .= '<th>ID</th>';
+        $html .= '<th>Maior</th>';
+        $html .= '<th>Ação</th>'; 
         $html .= '<th>Ação</th>'; 
         $html .= '</tr>';
         $html .= '</thead>';
@@ -65,7 +67,8 @@ if ($dados) {
             $html .= '<td>' . $row["email"] . '</td>';
             $html .= '<td>' . $row["genero"] . '</td>';
             $html .= '<td>' . $row["id"] . '</td>';
-            $html .= '<td><button class="btn" onclick="editar(' . $row["id"] . ')">Editar</ button></td>'; // Botão de editar recebe o ID do usuário como parametro
+            $html .= '<td>' . ($row["maior"] == 1 ? "Sim" : "Não") . '</td>'; // Substitui 1 por "Sim" e 0 por "Não"
+            $html .= '<td><button class="btn" onclick="editar(' . $row["id"] . ')">Editar</button></td>'; // Botão de editar recebe o ID do usuário como parâmetro
             $html .= '<td><button class="btn" onclick="excluir(' . $row["id"] . ')">Excluir</button></td>';
             $html .= '</tr>';
         }
@@ -77,7 +80,8 @@ if ($dados) {
         echo "Nenhum dado encontrado na tabela.";
     }
 } 
-    else if (isset($_POST['excluir_tudo'])) {
+
+else if (isset($_POST['excluir_tudo'])) {
     // Excluir todos os dados da tabela de usuários
     $sql = "DELETE FROM usuarios";
     if ($conn->query($sql) === true) {

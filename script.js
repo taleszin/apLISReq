@@ -2,7 +2,7 @@ let formularios = document.querySelector("#formularios");
 let dadosSalvos = [];
 let generoM = document.querySelector("#masc");
 let generoF = document.querySelector("#fem");
-
+let maiorIdade = document.querySelector('#maior')
 function limpar() {
     dadosSalvos = [];
     limparTabela(); // Limpa o conteúdo da tabela
@@ -31,12 +31,15 @@ function salvar() {
     let email = formularios.form3.value;
     let genero = "";
     let id = formularios.form4.value;
+    let maior = 0;
     if (generoM.checked) {
         genero = "Masculino";
     } else if (generoF.checked) {
         genero = "Feminino";
     }
-
+    if (maiorIdade.checked){
+        maior = 1;
+    }
     if (nome === "" || telefone === "" || email === "" || genero === "") {
         console.log("Preencha todos os campos antes de salvar.");
         alert("Preencha todos os campos antes de salvar.");
@@ -48,10 +51,9 @@ function salvar() {
         telefone: telefone,
         email: email,
         genero: genero,
-        id: id
+        id: id,
+        maior: maior
     };
-
-
     if (id !== "") {
         let dadosExistente = dadosSalvos.find(dados => dados.id === id);
         if (dadosExistente) {
@@ -62,7 +64,6 @@ function salvar() {
             return;
         }
     }
-    
     dadosSalvos.push(dados);
     console.log(dados);
 
