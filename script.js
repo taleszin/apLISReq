@@ -31,14 +31,14 @@ function salvar() {
     let email = formularios.form3.value;
     let genero = "";
     let id = formularios.form4.value;
-    let maior = 0;
+    let maior = 0; //inicia a variavel maior como 0.
     if (generoM.checked) {
         genero = "Masculino";
     } else if (generoF.checked) {
         genero = "Feminino";
     }
     if (maiorIdade.checked){
-        maior = 1;
+        maior = 1; //caso o checkbox esteja marcado, retorna maior como 1.
     }
     if (nome === "" || telefone === "" || email === "" || genero === "") {
         console.log("Preencha todos os campos antes de salvar.");
@@ -68,7 +68,7 @@ function salvar() {
     console.log(dados);
 
     limparCampos(); // Limpa os campos de entrada de dados
-
+    alert("Dados salvos com sucesso !");
     $.ajax({
         url: 'controller.php',
         method: 'POST',
@@ -141,6 +141,7 @@ function buscarDados() {
         error: function(error) {
             // Lidar com erros aqui
             console.log('Erro ao buscar os dados.');
+           
         }
     });
 }
@@ -151,7 +152,6 @@ function limparTabela() {
         tabela.removeChild(tabela.firstChild);
     }
 }
-
 function editar(id) {
     console.clear();
     console.log("ID do usuário a ser editado: " + id);
@@ -171,10 +171,17 @@ function editar(id) {
             formularios.form4.value = id; // Exibir o ID do banco de dados no campo form4
             // Preencher o botão de rádio de acordo com o gênero do usuário
             let genero = dadosUsuario[4]; // Atribuir o valor do gênero recuperado dos dados do usuário (4 pq é o quarto item no array de dados, 3 eh o id)
+            let maior = dadosUsuario[5];
             if (genero === "Masculino") {
                 generoM.checked = true; // Definir o botão de rádio masculino como selecionado
             } else if (genero === "Feminino") {
                 generoF.checked = true; // Definir o botão de rádio feminino como selecionado
+            }
+            if (maior == 1){
+                maiorIdade.checked = true;
+            }
+            else if (maior == 0){
+                maiorIdade.checked = false;
             }
         },
         error: function(error) {
@@ -182,8 +189,6 @@ function editar(id) {
         }
     });
 }
-
-
 function excluir(id) {
     // Exibe a mensagem de confirmação ao usuário
     if (confirm("Tem certeza que deseja excluir o usuário?")) {
