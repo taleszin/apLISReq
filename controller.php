@@ -8,13 +8,19 @@ if ($dados) {
         $email = $conn->real_escape_string($item['email']);
         $genero = $conn->real_escape_string($item['genero']);
         $maior = $conn->real_escape_string($item['maior']);
+
+        // Verificar se o e-mail é válido
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "O endereço de e-mail inserido não é válido.";
+            continue; // Pula para a próxima iteração do loop sem inserir o usuário
+        }
         if (isset($item['id'])) {
             $id = $conn->real_escape_string($item['id']);
             // Verificar se o usuário já existe pelo ID
             $sql = "SELECT * FROM usuarios WHERE id='$id'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
-                echo "Usuário já existe krl";
+                echo "Usuário já existe";
                 // Atualizar os dados do usuário existente
                 $sql = "UPDATE usuarios SET nome='$nome', telefone='$telefone', email='$email', genero='$genero', maior = '$maior' WHERE id='$id'";
                 if ($conn->query($sql) === true) {
@@ -37,6 +43,7 @@ if ($dados) {
         }
     }
 }
+
 
 else if (isset($_POST['buscar_dados'])) {
     // Buscar os dados na tabela de usuários
@@ -91,7 +98,6 @@ else if (isset($_POST['excluir_tudo'])) {
 }
 
 else if (isset($_POST['excluir_usuario'])) {
-
     $id = $_POST['id'];
     $sql = "DELETE FROM usuarios WHERE ID = $id";
     if ($conn->query($sql) === true) {
@@ -103,8 +109,8 @@ else if (isset($_POST['excluir_usuario'])) {
 else if (isset($_GET['editar_usuario']) && isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM usuarios WHERE ID = $id"; //pega os dados do usuário pelo id.
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
+    $result = $conn->query($sql); 
+    if ($result->num_rows > 0) { // Isso indica se algum dado foi encontrado para o ID fornecido
         $row = $result->fetch_assoc(); //retorna os dados em cada campo de texto, lá no javascript.
         $nome = $conn->real_escape_string($row['nome']);
         $telefone = $conn->real_escape_string($row['telefone']);

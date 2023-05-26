@@ -1,9 +1,6 @@
 autoincrement sql feito
 Fazer editar o usuário inserido
 Poder excluir o ultimo registro.
-
-
-
 função editar{
     agora minha função editar consegue puxar os dados do usuário pelo ID e inserir os dados no campo de texto. Quero que, 
     ao atualizar os dados desse usuário e clicar em salvar, os dados dele sejam atualizados no banco de dados automaticamente.
@@ -45,12 +42,6 @@ função editar{
 função excluirdado individual{
     essa função irá pegar o id do usuário (já consigo fazer isso)
     após pegar o id do usuário, ela irá deletar aquele usuário individual.
-}
-
-função update{
-    faça uma função update. essa função trabalhará da seguinte forma. após a função editar ser chamada, os dados do usuário serão
-    inseridos no textfield. a função update irá trabalhar assim, após o clique da função editar. a função update
-    irá fazer a atualização dos dados do usuário daquele id. lembre-se que o id existe apenas no banco de dados, segue o arquivo script.js :
 }
 ao excluir, botar mensagem confirmando
 radio quando editar

@@ -17,8 +17,8 @@ include_once("controller.php");
 </head>
 <body>
     <div id="tudo">
-        <h1>Cadastro</h1>
         <div class="forms">
+        <h1>Cadastro</h1>
             <form id="formularios">
                 <label for="form1">Nome:</label>
                 <div class="input-with-icon">
@@ -28,7 +28,7 @@ include_once("controller.php");
                 <label for="form3">Email:</label>
                 <div class="input-with-icon">
                     <i class="fas fa-envelope"></i>
-                    <input type="text" name="form3" class="form3" autocomplete="off">
+                    <input type="email" name="form3" class="form3" autocomplete="off">
                 </div>
                 <label for="form2">Telefone:</label>
                 <div class="input-with-icon">
@@ -38,13 +38,13 @@ include_once("controller.php");
                 <input type="hidden" name="form4" class="form4" autocomplete="off">
                 <label for="form5" class="label-maior">Maior de 18?</label>
                 <input type="checkbox" name="form5" class="form5" id="maior" autocomplete="off">
-                <div class="radio">
+                <div class="radios">
                     <label for="masc">
-                        <input type="radio" name="gender" id="masc">
+                        <input type="radio" name="gender" id="masc" class = "radio">
                         Masculino
                     </label>
                     <label for="fem">
-                        <input type="radio" name="gender" id="fem">
+                        <input type="radio" name="gender" id="fem" class = "radio">
                         Feminino
                     </label>
                 </div>

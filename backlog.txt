@@ -1,6 +1,1 @@
-A ser feito hoje :
-Consertar posição na página do checkbox maior de idade V
-Consertar posição do limpar campos    
-Consertar posição do checkbox masc e fem V
-atualizar a função de atualizar usuario para pegar tbm se é maior de idade ou não.
-Colocar icones dentro dos textArea 
+SEXTOU

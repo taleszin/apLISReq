@@ -1,3 +1,4 @@
+//variaveis globais que serão reutilizadas em varias funções.
 let formularios = document.querySelector("#formularios");
 let dadosSalvos = [];
 let generoM = document.querySelector("#masc");
@@ -8,82 +9,75 @@ function limpar() {
     limparTabela(); // Limpa o conteúdo da tabela
 }
 
-// function ligacaoPHP() {
-//     console.log(dadosSalvos);
-//     $.ajax({
-//         url: 'controller.php',
-//         method: 'POST',
-//         data: { dados: JSON.stringify(dadosSalvos) }, // Enviar os dados como uma string JSON
-//         success: function(response) {
-//             // Manipular a resposta da requisição aqui
-//             console.log('FUNCIONOU');
-//         },
-//         error: function(error) {
-//             // Lidar com erros aqui
-//             console.log('NÃO FUNCIONOU');
-//         }
-//     });
-// }
-
 function salvar() {
     let nome = formularios.form1.value;
     let telefone = formularios.form2.value;
     let email = formularios.form3.value;
     let genero = "";
     let id = formularios.form4.value;
-    let maior = 0; //inicia a variavel maior como 0.
+    let maior = 0;
+  
     if (generoM.checked) {
-        genero = "Masculino";
+      genero = "Masculino";
     } else if (generoF.checked) {
-        genero = "Feminino";
+      genero = "Feminino";
     }
+  
     if (maiorIdade.checked){
-        maior = 1; //caso o checkbox esteja marcado, retorna maior como 1.
+      maior = 1;
     }
+  
     if (nome === "" || telefone === "" || email === "" || genero === "") {
-        console.log("Preencha todos os campos antes de salvar.");
-        alert("Preencha todos os campos antes de salvar.");
-        return;
+      console.log("Preencha todos os campos antes de salvar.");
+      alert("Preencha todos os campos antes de salvar.");
+      return;
     }
-
+  
+    // Verificar se o e-mail é válido
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailRegex)) {
+      console.log("O endereço de e-mail inserido não é válido.");
+      alert("O endereço de e-mail inserido não é válido.");
+      return;
+    }
+  
+    // Verificar se o telefone é válido
+    if (telefone.length < 14) {
+      console.log("O telefone inserido é inválido.");
+      alert("O telefone inserido é inválido.");
+      return;
+    }
+  
     let dados = {
-        nome: nome,
-        telefone: telefone,
-        email: email,
-        genero: genero,
-        id: id,
-        maior: maior
+      nome: nome,
+      telefone: telefone,
+      email: email,
+      genero: genero,
+      id: id,
+      maior: maior
     };
-    if (id !== "") {
-        let dadosExistente = dadosSalvos.find(dados => dados.id === id);
-        if (dadosExistente) {
-            console.clear();
-            console.log('Esse usuário já foi cadastrado.');
-            alert('Esse usuário já foi cadastrado.');
-            limparCampos(); // Limpa os campos de entrada de dados
-            return;
-        }
-    }
+  
     dadosSalvos.push(dados);
     console.log(dados);
-
+  
     limparCampos(); // Limpa os campos de entrada de dados
     alert("Dados salvos com sucesso !");
+  
     $.ajax({
-        url: 'controller.php',
-        method: 'POST',
-        data: { dados: JSON.stringify(dadosSalvos) },
-        success: function(response) {
-            console.clear();
-            console.log('Dados salvos:', response);
-            buscarDados();
-            limparDadosSalvos();
-        },
-        error: function(error) {
-            console.log('Erro ao salvar os dados.');
-        }
+      url: 'controller.php',
+      method: 'POST',
+      data: { dados: JSON.stringify(dadosSalvos) },
+      success: function(response) {
+        console.clear();
+        console.log('Dados salvos:', response);
+        buscarDados();
+        limparDadosSalvos();
+      },
+      error: function(error) {
+        console.log('Erro ao salvar os dados.');
+      }
     });
-}
+  }
 
 function limparCampos() {
     formularios.form1.value = '';
@@ -91,6 +85,7 @@ function limparCampos() {
     formularios.form3.value = '';
     generoM.checked = false;
     generoF.checked = false;
+    maiorIdade.checked = false;
 }
 
 function excluirTudo() {
@@ -114,18 +109,7 @@ function limparDadosSalvos() {
     dadosSalvos = []; // Limpa o array de dados salvos no JavaScript
 }
 
-// function visualiza() {
-//     let textodoAlert1 = '';
-//     let textodoAlert2 = '';
-//     let textodoAlert3 = '';
-
-//     formularios.form1.value = textodoAlert1;
-//     formularios.form2.value = textodoAlert2;
-//     formularios.form3.value = textodoAlert3;
-// }
-
 $('.form2').mask('(00) 00000-0000');
-
 function buscarDados() {
     let tabela = document.getElementById("minha-tabela");
     limparTabela(); // Limpa o conteúdo anterior da tabela
@@ -169,7 +153,6 @@ function editar(id) {
             formularios.form2.value = dadosUsuario[1];
             formularios.form3.value = dadosUsuario[2];
             formularios.form4.value = id; // Exibir o ID do banco de dados no campo form4
-            // Preencher o botão de rádio de acordo com o gênero do usuário
             let genero = dadosUsuario[4]; // Atribuir o valor do gênero recuperado dos dados do usuário (4 pq é o quarto item no array de dados, 3 eh o id)
             let maior = dadosUsuario[5];
             if (genero === "Masculino") {
@@ -212,53 +195,3 @@ function excluir(id) {
         console.log("Exclusão cancelada pelo usuário.");
     }
 }
-
-
-// function update() {
-//     let nome = formularios.form1.value;
-//     let telefone = formularios.form2.value;
-//     let email = formularios.form3.value;
-//     let genero = "";
-
-//     if (generoM.checked) {
-//         genero = "Masculino";
-//     } else if (generoF.checked) {
-//         genero = "Feminino";
-//     }
-
-//     if (nome === "" || telefone === "" || email === "" || genero === "") {
-//         console.log("Preencha todos os campos antes de atualizar.");
-//         alert("Preencha todos os campos antes de atualizar.");
-//         return;
-//     }
-
-//     let dadosAtualizados = {
-//         nome: nome,
-//         telefone: telefone,
-//         email: email,
-//         genero: genero
-//     };
-
-//     if (!dadosJaExiste(dadosAtualizados)) {
-//         console.log('Esse usuário ainda não foi cadastrado.');
-//         alert('Esse usuário ainda não foi cadastrado.');
-//         limparCampos();
-//         return;
-//     }
-
-//     let idUsuario = getIdUsuarioAtual();
-
-//     $.ajax({
-//         url: 'controller.php',
-//         method: 'POST',
-//         data: { atualizar_usuario: true, id: idUsuario, dados: JSON.stringify(dadosAtualizados) },
-//         success: function(response) {
-//             console.log(response);
-//             limparCampos();
-//             buscarDados();
-//         },
-//         error: function(error) {
-//             console.log('Erro ao atualizar os dados do usuário.');
-//         }
-//     });
-// }
