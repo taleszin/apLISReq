@@ -50,3 +50,10 @@ ctrl p - > emmet div
 // maior de idade 0 ou 1 feito
 validar email
 mensagens de confirmação
+
+
+Login {
+    validar()
+    banco de dados com os usuários e senhas
+    
+    }
