@@ -36,7 +36,7 @@ include_once("controle.php");
     </div>
     <div class="container" id="container2">
       <div class="login-box">
-        <h1>Registrar</h1>
+        <h1 id = "h1r">Registrar</h1>
         <form>
           <div class="input-with-icon">
             <input type="text" id="usuarioRegistrar" class="formulario" placeholder="Nome de usuário" required autocomplete="off">
