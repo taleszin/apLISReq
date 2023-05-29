@@ -30,6 +30,22 @@ form {
   flex-direction: column;
 }
 
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-left: 30px;
+}
+
+.input-with-icon i {
+  position: absolute;
+  top: 45%;
+  left: 10px;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
 input[type="text"],
 input[type="password"] {
   padding: 10px;
@@ -57,9 +73,9 @@ a {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  border-top: 10px;
 }
-h1{
+
+h1 {
   font-family: Impact, Charcoal, sans-serif;
   font-size: 40px;
   letter-spacing: 1px;
@@ -69,4 +85,8 @@ h1{
   font-style: normal;
   font-variant: normal;
   text-transform: none;
+}
+.formulario{
+  text-indent: 10%;
+  top: 45%;
 }

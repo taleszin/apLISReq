@@ -19,11 +19,17 @@ include_once("controle.php");
     <div class="login-box">
       <h1>Login</h1>
       <form>
-        <input type="text" id= "usuario" placeholder="Nome de usuário" required autocomplete = "off">
-        <input type="password" id= "senha" placeholder="Senha" required autocomplete = "off">
-        <button type="submit" id = "btnLogin" class = "btn">Entrar</button>
+        <div class="input-with-icon">
+          <input type="text" id="usuario" class = "formulario" placeholder="Nome de usuário" required autocomplete="off">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="input-with-icon">
+          <input type="password" id="senha" class = "formulario" placeholder="Senha" required autocomplete="off">
+          <i class="fas fa-lock"></i>
+        </div>
+        <button type="submit" id="btnLogin" class="btn">Entrar</button>
       </form>
-      <a href="../crud.php" target = "_blank">Esqueceu sua senha?</a>
+      <a href="../crud.php" target="_blank">Esqueceu sua senha?</a>
     </div>
   </div>
 </body>
