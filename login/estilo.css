@@ -5,11 +5,23 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.container {
+section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+}
+
+.container {
+  width: 40%;
+  box-sizing: border-box;
+  height: 75vh;
+  overflow: hidden;
+  transition: width 0.5s, opacity 0.5s;
+  opacity: 0.5; 
+  border-radius: 10%;
+  margin-right: -10px;
+}
+
+.container:hover {
+  opacity: 1; /* Aumentando a opacidade ao passar o mouse */
 }
 
 .login-box {
@@ -18,7 +30,13 @@ body {
   padding: 40px;
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 100%; /* Faça com que a caixa ocupe toda a altura do contêiner */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centralize verticalmente o conteúdo */
+  align-items: center; /* Centralize verticalmente os itens */
 }
+
 
 .logo {
   width: 200px;
@@ -38,17 +56,17 @@ form {
   padding-left: 30px;
 }
 
-.input-with-icon i {
+.input-with-icon input + i {
   position: absolute;
-  top: 45%;
-  left: 10px;
+  top: 50%;
+  left: 5px;
   transform: translateY(-50%);
   opacity: 0.5;
 }
 
 input[type="text"],
 input[type="password"] {
-  padding: 10px;
+  padding: 10px 30px; /* Adicione espaço à esquerda para o ícone */
   margin-bottom: 10px;
   border: 1px solid #e50914;
   border-radius: 4px;
@@ -56,15 +74,20 @@ input[type="password"] {
 }
 
 button {
-  padding: 10px 20px;
+  padding: 8px 16px; 
   background-color: #e50914;
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px; 
   cursor: pointer;
+  width: 100px; 
 }
+botoesLogin{
+  display: flex;
+  justify-content: center;
 
+}
 a {
   padding: 10px 20px;
   background-color: #e50914;
@@ -86,7 +109,14 @@ h1 {
   font-variant: normal;
   text-transform: none;
 }
-.formulario{
+
+.formulario {
   text-indent: 10%;
   top: 45%;
+}
+#container1{
+  margin-left: 10%;
+}
+#container2{
+  margin-right: 10%;
 }
